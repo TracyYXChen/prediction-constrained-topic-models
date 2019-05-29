@@ -4,7 +4,7 @@ import os
 from scipy.special import gammaln, digamma
 from scipy.misc import logsumexp
 
-from calc_N_d_K__vb_qpiDir_qzCat import (
+from pc_toolbox.model_slda.est_local_params__vb_qpiDir_qzCat.calc_N_d_K__vb_qpiDir_qzCat import (
     calc_N_d_K__vb_coord_ascent__many_tries)
 
 def calc_elbo_for_many_docs(

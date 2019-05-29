@@ -15,11 +15,11 @@ from pc_toolbox.utils_diffable_transforms import (
     log_logistic_sigmoid,
     logistic_sigmoid,
     )
-from est_local_params__single_doc_map import (
+from pc_toolbox.model_slda.est_local_params__single_doc_map import (
     calc_nef_map_pi_d_K,
     make_convex_alpha_minus_1,
     DefaultDocTopicOptKwargs)
-from est_local_params__many_doc_map import (
+from pc_toolbox.model_slda.est_local_params__many_doc_map import (
     make_readable_summary_for_pi_DK_estimation,
     )
 
@@ -88,7 +88,7 @@ def calc_loss__slda(
     loss_x = 0.0
     loss_y = 0.0
     loss_pi = 0.0 
-    for d in xrange(n_docs):
+    for d in range(n_docs):
         start_d = dataset['doc_indptr_Dp1'][d]
         stop_d = dataset['doc_indptr_Dp1'][d+1]
         word_id_d_U = dataset['word_id_U'][start_d:stop_d]

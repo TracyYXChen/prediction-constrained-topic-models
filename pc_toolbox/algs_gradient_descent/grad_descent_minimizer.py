@@ -104,7 +104,7 @@ def minimize(
     cur_step_size = step_size
     cur_loss_val = init_loss_val
     cur_grad_norm_per_entry = init_grad_norm_per_entry
-    for step_id in xrange(0, n_steps + 1):
+    for step_id in range(0, n_steps + 1):
         if step_id > 0:
             grad_vec = grad_func_wrt_paramvec_and_step(param_vec, step_id=step_id)
 

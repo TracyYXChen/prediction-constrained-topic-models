@@ -337,7 +337,7 @@ if __name__ == '__main__':
             dataset_path=args.dataset_path,
             split_name=split_name,
             return_info=True)
-        print describe_bow_dataset(
+        print (describe_bow_dataset(
             dataset=dataset_dict,
             dataset_name="%s set of %s" % (split_name.upper(), args.dataset_name),
-            label_list=info_dict['label_list'])
+            label_list=info_dict['label_list']))

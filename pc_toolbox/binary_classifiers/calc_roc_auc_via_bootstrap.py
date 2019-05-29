@@ -90,8 +90,8 @@ def calc_binary_clf_metric_with_ci_via_bootstrap(
         i += 1
 
     if verbose:
-        for perc in [05, 10, 25, 50, 75, 90, 95]:
-            print "%02d percentile: %.3f" % (
+        for perc in [5, 10, 25, 50, 75, 90, 95]:
+            print ("%02d percentile: %.3f") % (
                 perc, np.percentile(bootstrapped_scores, perc))
 
     intervals = list()
@@ -104,7 +104,7 @@ def calc_binary_clf_metric_with_ci_via_bootstrap(
                 )
         intervals.append(interval)
         if verbose:
-            print "CI %2d-%2d:  %.3f - %.3f" % (
+            print ("CI %2d-%2d:  %.3f - %.3f") % (
                 ci_bound_low, ci_bound_high,
                 interval[0], interval[1],
                 )

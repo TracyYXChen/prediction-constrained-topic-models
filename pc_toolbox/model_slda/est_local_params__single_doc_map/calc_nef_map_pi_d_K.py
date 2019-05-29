@@ -19,19 +19,19 @@ import time
 import sys
 import os
 
-from calc_nef_map_pi_d_K__defaults import DefaultDocTopicOptKwargs
+from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__defaults import DefaultDocTopicOptKwargs
 
 ## Load other modules
-from calc_nef_map_pi_d_K__autograd import (
+from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__autograd import (
     calc_nef_map_pi_d_K__autograd)
 
-from calc_nef_map_pi_d_K__numpy_linesearch import (
+from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__numpy_linesearch import (
     calc_nef_map_pi_d_K__numpy_linesearch)
 
 # Try to load tensorflow code
 # Fall back on python
 try:
-    from calc_nef_map_pi_d_K__tensorflow import calc_nef_map_pi_d_K__tensorflow
+    from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__tensorflow import calc_nef_map_pi_d_K__tensorflow
     HAS_TENSORFLOW = True
 except ImportError:
     HAS_TENSORFLOW = False
@@ -40,13 +40,13 @@ except ImportError:
 # Try to load cython code
 # Fall back on python code
 try:
-    from calc_nef_map_pi_d_K__cython import calc_nef_map_pi_d_K__cython
+    from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__cython import calc_nef_map_pi_d_K__cython
     HAS_CYTHON = True
 except ImportError:
     HAS_CYTHON = False
     calc_nef_map_pi_d_K__cython = None
 try:
-    from calc_nef_map_pi_d_K__cython_linesearch import (
+    from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__cython_linesearch import (
         calc_nef_map_pi_d_K__cython_linesearch)
     HAS_CYTHON_LINESEARCH = True
 except ImportError:
@@ -194,12 +194,12 @@ if __name__ == '__main__':
         topics_KUd /= np.sum(topics_KUd, axis=1)[:,np.newaxis]
         word_ct_d_Ud = prng.randint(low=1, high=3, size=Ud)
         word_ct_d_Ud = np.asarray(word_ct_d_Ud, dtype=np.float64)
-    print "Applying K=%d topics to doc with Ud=%d uniq terms" % (K, Ud)
-    print "nef_alpha = ", nef_alpha
+    print ("Applying K=%d topics to doc with Ud=%d uniq terms" % (K, Ud))
+    print ("nef_alpha = ", nef_alpha)
 
-    print "default kwargs"
+    print ("default kwargs")
     for key in sorted(lstep_kwargs):
-        print "%-50s %s" % (key, lstep_kwargs[key])
+        print ("%-50s %s" % (key, lstep_kwargs[key]))
 
     for method in [
             'tensorflow',
@@ -216,7 +216,7 @@ if __name__ == '__main__':
             method=method,
             **lstep_kwargs)
         if pi_d_K is None:
-            print "SKIPPING %-20s" % (method)
+            print ("SKIPPING %-20s" % (method))
             continue
         elapsed_time_sec = time.time() - start_time
 
@@ -224,12 +224,12 @@ if __name__ == '__main__':
             top_ids = np.argsort(-1 * pi_d_K)[:8]
         else:
             top_ids = np.arange(K)
-        print "RESULT %-20s : after %8.3f sec" % (method, elapsed_time_sec)
-        print "    ", ' '.join(['%.4f' % x for x in pi_d_K[top_ids]])
-        print "        n_iters      = %5d" % info_dict['n_iters']
-        print "        did_converge = %d" % info_dict['did_converge']
-        print "        cur_L1_diff  = %.5f" % info_dict['cur_L1_diff']
-        print "        pi_step_size = %.5f" % info_dict['pi_step_size']
-        print "        n_restarts   = %d" % info_dict['n_restarts']
-        print "        nef_alpha    = %.3f" % (
-            info_dict['convex_alpha_minus_1'] + 1.0)
+        print ("RESULT %-20s : after %8.3f sec" % (method, elapsed_time_sec))
+        print ("    ", ' '.join(['%.4f' % x for x in pi_d_K[top_ids]]))
+        print ("        n_iters      = %5d" % info_dict['n_iters'])
+        print ("        did_converge = %d" % info_dict['did_converge'])
+        print ("        cur_L1_diff  = %.5f" % info_dict['cur_L1_diff'])
+        print ("        pi_step_size = %.5f" % info_dict['pi_step_size'])
+        print ("        n_restarts   = %d" % info_dict['n_restarts'])
+        print ("        nef_alpha    = %.3f" % (
+            info_dict['convex_alpha_minus_1'] + 1.0))

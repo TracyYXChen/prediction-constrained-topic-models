@@ -4,9 +4,9 @@ import os
 import time
 from sklearn.externals import joblib
 
-from slda_estimator__w_given_pi import (
+from pc_toolbox.model_slda.slda_estimator__w_given_pi import (
     estimate_w_CK__given_pi_DK)
-from slda_utils__dataset_manager import (
+from pc_toolbox.model_slda.slda_utils__dataset_manager import (
     load_dataset,
     )
 from pc_toolbox.utils_io import (
@@ -236,7 +236,7 @@ def init_topics_KV__rand_docs(
         np.arange(dataset['n_docs'], dtype=np.int32),
         n_states,
         replace=False)
-    for k in xrange(n_states):
+    for k in range(n_states):
         start_d = dataset['doc_indptr_Dp1'][chosen_doc_ids[k]]
         stop_d = dataset['doc_indptr_Dp1'][chosen_doc_ids[k] + 1]
         active_words_U = dataset['word_id_U'][start_d:stop_d]

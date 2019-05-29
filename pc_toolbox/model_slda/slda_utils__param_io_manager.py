@@ -125,9 +125,9 @@ def load_topic_model_param_dict(
         w_txt_fpath = os.path.join(snapshot_path, w_txt_basename)
         if w_txt_basename != 'w_CK.txt':
             if os.path.exists(w_txt_fpath):
-                print "  USING w_txt_basename:", w_txt_basename
+                print ("  USING w_txt_basename:", w_txt_basename)
             else:
-                print "  FALLING BACK TO w_CK.txt"
+                print ("  FALLING BACK TO w_CK.txt")
                 w_txt_fpath = os.path.join(snapshot_path, 'w_CK.txt')
         w_CK = np.loadtxt(w_txt_fpath)
         if w_CK.ndim == 1:

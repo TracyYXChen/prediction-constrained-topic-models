@@ -1,6 +1,6 @@
 import numpy as np
 
-from calc_nef_map_pi_d_K__defaults import DefaultDocTopicOptKwargs
+from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__defaults import DefaultDocTopicOptKwargs
 
 def calc_nef_map_pi_d_K__numpy_linesearch(
         word_id_d_Ud=None,
@@ -120,9 +120,9 @@ def calc_nef_map_pi_d_K__numpy_linesearch(
                       + "  delta_pi %.5f  delta_loss %.9e <<< keep"
                 msg_str = msg_str % (
                     giter, cur_step_size, new_loss, delta_mass, delta_loss)
-                print msg_str
+                print (msg_str)
             if verbose_pi:
-                print '  '.join(["%.5e" % a for a in new_pi_d_K])
+                print ('  '.join(["%.5e" % a for a in new_pi_d_K]))
             best_pi_d_K = 1.0 * new_pi_d_K
             best_denom_Ud = new_denom_Ud
             best_loss = new_loss

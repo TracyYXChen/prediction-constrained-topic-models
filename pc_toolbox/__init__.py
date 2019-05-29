@@ -1,10 +1,10 @@
 import os
 
-import utils_io
-import utils_data
-import utils_snapshots
+import pc_toolbox.utils_io
+import pc_toolbox.utils_data
+import pc_toolbox.utils_snapshots
 
-import model_slda
+import pc_toolbox.model_slda
 
 # TODO discard this line
 # calc_nef_map_pi_DK = model_slda.calc_nef_map_pi_DK

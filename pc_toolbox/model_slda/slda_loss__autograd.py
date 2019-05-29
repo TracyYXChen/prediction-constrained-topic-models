@@ -15,17 +15,17 @@ from pc_toolbox.utils_diffable_transforms import (
     logistic_sigmoid,
     )
 
-import slda_utils__dataset_manager
+import pc_toolbox.model_slda.slda_utils__dataset_manager
 
-from slda_utils__param_manager import (
+from pc_toolbox.model_slda.slda_utils__param_manager import (
     unflatten_to_common_param_dict,
     flatten_to_differentiable_param_vec,
     )
-from est_local_params__single_doc_map import (
+from pc_toolbox.model_slda.est_local_params__single_doc_map import (
     calc_nef_map_pi_d_K__autograd,
     make_convex_alpha_minus_1,
     DefaultDocTopicOptKwargs)
-from est_local_params__many_doc_map import (
+from pc_toolbox.model_slda.est_local_params__many_doc_map import (
     make_readable_summary_for_pi_DK_estimation,
     )
 
@@ -67,7 +67,7 @@ def make_loss_func_and_grad_func_wrt_paramvec_and_step(
                 seed=data_seed,
                 n_total=dataset['n_docs'],
                 n_batches=n_batches)
-            cur_dataset = slda_utils__dataset_manager.slice_dataset(
+            cur_dataset = pc_toolbox.model_slda.slda_utils__dataset_manager.slice_dataset(
                 dataset=dataset,
                 cur_slice=cur_slice)
             frac_train_laps_completed = np.minimum(
@@ -183,7 +183,7 @@ def calc_loss__slda(
     loss_y = 0.0
     loss_pi = 0.0 
     assert pi_estimation_mode == 'missing_y'
-    for d in xrange(n_docs):
+    for d in range(n_docs):
         start_d = dataset['doc_indptr_Dp1'][d]
         stop_d = dataset['doc_indptr_Dp1'][d+1]
         word_id_d_U = dataset['word_id_U'][start_d:stop_d]

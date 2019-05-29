@@ -14,7 +14,7 @@ from sklearn.metrics import roc_auc_score
 from distutils.dir_util import mkpath
 from collections import OrderedDict
 
-import slda_loss__cython
+import pc_toolbox.model_slda.slda_loss__cython
 
 from pc_toolbox.utils_io import (
     pprint,
@@ -114,7 +114,7 @@ def calc_perf_metrics_for_snapshot_param_dict(
     split_names = ['train', 'valid', 'test']
     for split_name in split_names:
         etimes = start_timer_segment(etimes, '%s_calc_lossmap' % split_name)
-        ans_dict = slda_loss__cython.calc_loss__slda(
+        ans_dict = pc_toolbox.model_slda.slda_loss__cython.calc_loss__slda(
             dataset=datasets_by_split[split_name],
             topics_KV=topics_KV,
             w_CK=w_CK,
@@ -160,7 +160,7 @@ def calc_perf_metrics_for_snapshot_param_dict(
             C = y_proba_DC.shape[1]
             assert np.nanmin(y_proba_DC) >= 0.0
             assert np.nanmax(y_proba_DC) <= 1.0
-            for c in xrange(n_labels):
+            for c in range(n_labels):
                 ytrue_c_D = datasets_by_split[split_name]['y_DC'][:,c]
                 yproba_c_D = y_proba_DC[:, c]
                 # Keep only finite values
@@ -274,7 +274,7 @@ def calc_perf_metrics_for_snapshot_param_dict(
             index=False,
             header=False,
             columns=col_order) # relying on an ordered dict here
-        assert np.max(map(len, col_order)) <= 20
+        assert np.max(list(map(len, col_order))) <= 20
         if not disable_output:
             csv_fpath = os.path.join(output_path, 'snapshot_perf_metrics_%s.csv' % split_name)
             ppcsv_fpath = os.path.join(output_path, 'pretty_snapshot_perf_metrics_%s.csv' % split_name)

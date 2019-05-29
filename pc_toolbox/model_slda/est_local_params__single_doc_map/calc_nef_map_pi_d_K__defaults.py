@@ -18,7 +18,7 @@ def make_default_kwargs():
                 lstep_kwargs[key] = float(os.environ[key])
             else:
                 lstep_kwargs[key] = int(os.environ[key])
-            print ">>> OVERRIDE DEFAULT LSTEP KW: %s = %s" % (
-                key, os.environ[key])
+            print (">>> OVERRIDE DEFAULT LSTEP KW: %s = %s" % (
+                key, os.environ[key]))
     return lstep_kwargs
 DefaultDocTopicOptKwargs = make_default_kwargs()

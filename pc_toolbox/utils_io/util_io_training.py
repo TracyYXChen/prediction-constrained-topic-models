@@ -36,7 +36,7 @@ def is_lap_in_custom_str(
     '''
     list_of_laps_with_no_empties = map(
         float, filter(None, str(laps_to_save_custom).split(',')))
-    if len(list_of_laps_with_no_empties) > 0:
+    if len(list(list_of_laps_with_no_empties)) > 0:
         # Do in numerically robust way
         is_match_M = np.abs(
             np.asarray(list_of_laps_with_no_empties) - float(cur_lap))
@@ -374,4 +374,4 @@ if __name__ == '__main__':
         n_laps=20,
         n_steps_between_save=5,
         laps_to_save_custom='1,3,5,7,11,13,17,19')
-    print do_save_laps
+    print (do_save_laps)

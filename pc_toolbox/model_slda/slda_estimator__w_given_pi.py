@@ -47,7 +47,7 @@ def estimate_w_CK__given_pi_DK(
     else:
         y_DC = dataset['y_DC']
 
-    for c in xrange(C):
+    for c in range(C):
         # Do a quick regression to get initial weights!
         if output_data_type.count('binary') > 0:
             clf = LogisticRegression(

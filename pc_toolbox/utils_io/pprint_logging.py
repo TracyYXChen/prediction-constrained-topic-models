@@ -7,7 +7,7 @@ RootLog = None
 def pprint(msg_str='', level=logging.INFO):
     global RootLog
     if RootLog is None:
-        print msg_str
+        print (msg_str)
     else:
         RootLog.log(level, msg_str)
 

@@ -19,7 +19,7 @@ from pc_toolbox.utils_io import (
     calc_laps_when_snapshots_saved,
     )
 
-from grad_descent_minimizer import calc_l2_norm_of_vector_per_entry
+from pc_toolbox.algs_gradient_descent.grad_descent_minimizer import calc_l2_norm_of_vector_per_entry
 
 def minimize(
         loss_func_wrt_paramvec_and_step=None,

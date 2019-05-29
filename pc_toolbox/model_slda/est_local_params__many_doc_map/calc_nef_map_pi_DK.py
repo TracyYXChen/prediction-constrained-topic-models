@@ -10,7 +10,7 @@ from pc_toolbox.utils_io import (
     pprint,
     make_percentile_str)
 
-from utils_summarize_pi_DK_estimation import (
+from pc_toolbox.model_slda.est_local_params__many_doc_map.utils_summarize_pi_DK_estimation import (
     make_readable_summary_for_pi_DK_estimation)
 
 def calc_nef_map_pi_DK(
@@ -80,7 +80,7 @@ def calc_nef_map_pi_DK(
     is_time = False
     start_time_sec = time.time()
     last_print_sec = start_time_sec
-    for d in xrange(n_docs):
+    for d in range(n_docs):
         start_d = doc_indptr_Dp1[d]
         stop_d = doc_indptr_Dp1[d+1]
 

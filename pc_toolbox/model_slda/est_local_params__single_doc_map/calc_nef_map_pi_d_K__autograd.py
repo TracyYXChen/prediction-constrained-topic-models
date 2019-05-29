@@ -1,6 +1,6 @@
 import autograd.numpy as np
 
-from calc_nef_map_pi_d_K__defaults import DefaultDocTopicOptKwargs
+from pc_toolbox.model_slda.est_local_params__single_doc_map.calc_nef_map_pi_d_K__defaults import DefaultDocTopicOptKwargs
 
 def calc_nef_map_pi_d_K__autograd(
         word_id_d_Ud=None,

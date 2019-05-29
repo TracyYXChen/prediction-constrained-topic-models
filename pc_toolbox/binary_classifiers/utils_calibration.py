@@ -107,7 +107,7 @@ if __name__ == '__main__':
         bins=bins)
     bin_edges = info_per_bin['bin_edges']
     for bb in range(bin_edges.size - 1):
-        print "bin [%.2f, %.2f]  count %5d  fracTP %.3f" % (
+        print ("bin [%.2f, %.2f]  count %5d  fracTP %.3f") % (
             bin_edges[bb],
             bin_edges[bb+1],
             info_per_bin['count_per_bin'][bb],

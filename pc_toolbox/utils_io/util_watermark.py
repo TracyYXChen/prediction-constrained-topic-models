@@ -1,4 +1,7 @@
 import pip
+import os
+import sys
+import subprocess
 
 def make_string_of_reachable_modules_with_versions(context_dict=None):
     if context_dict is None:
@@ -10,7 +13,8 @@ def make_string_of_reachable_modules_with_versions(context_dict=None):
         if str(type(val)).count('module'):
             # This trick will import parent package
             # e.g. scipy.stats becomes scipy
-            if val.__package__ is None:
+            #if val.__package__ is None:
+            if len(val.__package__) == 0:
                 mod_name = val.__name__
                 mod = val
             else:
@@ -27,8 +31,11 @@ def make_string_of_reachable_modules_with_versions(context_dict=None):
                     elif req_line.count(">="):
                         mname = req_line.split(">=")[0]
                     reachable_modules[mname] = None
-
-    ver_info_list = [val for val in pip.operations.freeze.freeze()]
+    #cannot import internal package from pip
+    #ver_info_list = [val for val in pip.operations.freeze.freeze()]
+    #ver_info_list = [val for val in pip._internal.operations.freeze.freeze()]
+    _ = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
+    ver_info_list = _.decode("utf-8").split('\n') 
 
     explained_reachables = []
     ans_list = []

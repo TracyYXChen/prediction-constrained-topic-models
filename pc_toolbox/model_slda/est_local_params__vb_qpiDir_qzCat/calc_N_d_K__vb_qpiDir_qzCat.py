@@ -45,7 +45,7 @@ def calc_N_d_K__vb_coord_ascent__many_tries(
         else:
             n_reps = 1
 
-        for rep in xrange(n_reps):
+        for rep in range(n_reps):
             init_P_d_K = make_initial_P_d_K(
                 init_name,
                 prng=prng,
@@ -76,12 +76,12 @@ def calc_N_d_K__vb_coord_ascent__many_tries(
                 best_N_d_K = cur_N_d_K
                 best_info = cur_info
                 if verbose:
-                    print "best: %s" % init_name
+                    print ("best: %s" % init_name)
             elif cur_ELBO > best_ELBO - 1e-6:
                 if verbose:
-                    print "tied: %s" % init_name
+                    print ("tied: %s" % init_name)
     if verbose:
-        print ""
+        print ("")
     best_info['ELBO'] = best_ELBO
     return best_N_d_K, best_info
 
@@ -212,7 +212,7 @@ def pprint__N_d_K(N_d_K, label='', elbo=None):
             + " " + ' '.join(['%7.2f' % a for a in N_d_K])
             + " %.7e" % elbo)
     else:
-        print "%6s" % label, ' '.join(['%7.2f' % a for a in N_d_K])
+        print ("%6s" % label, ' '.join(['%7.2f' % a for a in N_d_K]))
 
 def c_Dir_1D(alpha_K):
     return gammaln(np.sum(alpha_K)) - np.sum(gammaln(alpha_K))
@@ -247,7 +247,7 @@ if __name__ == '__main__':
     word_id_d_Ud = np.arange(Ud)
     word_ct_d_Ud = prng.randint(low=1, high=3, size=Ud)
     word_ct_d_Ud = np.asarray(word_ct_d_Ud, dtype=np.float64)
-    print "Applying K=%d topics to doc with Ud=%d uniq terms" % (K, Ud)
+    print ("Applying K=%d topics to doc with Ud=%d uniq terms" % (K, Ud))
 
 
     for (init_name, init_pi_d_K) in [

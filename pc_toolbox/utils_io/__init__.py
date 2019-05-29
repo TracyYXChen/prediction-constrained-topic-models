@@ -1,15 +1,15 @@
-from pprint_logging import pprint, config_pprint_logging
-from util_pprint_percentiles import make_percentile_str
+from pc_toolbox.utils_io.pprint_logging import pprint, config_pprint_logging
+from pc_toolbox.utils_io.util_pprint_percentiles import make_percentile_str
 
-from util_watermark import make_string_of_reachable_modules_with_versions
+from pc_toolbox.utils_io.util_watermark import make_string_of_reachable_modules_with_versions
 
-from util_timing import (
+from pc_toolbox.utils_io.util_timing import (
     start_timer_segment,
     stop_timer_segment,
     pprint_timer_segments,
     )
 
-from util_io_training import (
+from pc_toolbox.utils_io.util_io_training import (
     do_print_now,
     do_save_now,
     default_settings_alg_io,
@@ -24,7 +24,7 @@ from util_io_training import (
     calc_laps_when_snapshots_saved,
     )
 
-from util_setup import (
+from pc_toolbox.utils_io.util_setup import (
     setup_detect_taskid_and_insert_into_output_path,
     setup_random_seed,
     setup_output_path,
@@ -33,18 +33,18 @@ from util_setup import (
     write_python_module_versions_to_txt,
     )
 
-from util_io_csr import (
+from pc_toolbox.utils_io.util_io_csr import (
     load_csr_matrix,
     save_csr_matrix,
     load_csr_matrix_from_ldac_txtfile,
     )
 
-from util_io_txt import (
+from pc_toolbox.utils_io.util_io_txt import (
     load_list_of_strings_from_txt,
     load_list_of_unicode_from_txt,
     )
 
-from util_array import (
+from pc_toolbox.utils_io.util_array import (
     toCArray,
     as1D,
     as2D,
