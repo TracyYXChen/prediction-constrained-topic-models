@@ -117,7 +117,7 @@ if __name__ == '__main__':
         x_list.append(x_V)
         y_list.append(y_C)
         if (d+1) % 100 == 0 or (d == n_docs -1):
-            print "generated doc %d/%d" % (d+1, n_docs)
+            print ("generated doc %d/%d" % (d+1, n_docs))
 
     # stack into array format
     x_DV = np.vstack(x_list)

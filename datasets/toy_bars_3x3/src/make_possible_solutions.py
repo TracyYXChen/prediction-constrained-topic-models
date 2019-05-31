@@ -6,6 +6,7 @@ import os
 
 from sklearn.externals import joblib
 
+sys.path.insert(0,'../../..')
 from pc_toolbox.model_slda import (
     slda_loss__autograd,
     slda_utils__dataset_manager)
@@ -73,8 +74,8 @@ for arr in topics_KV_by_name.values():
 
 np.set_printoptions(linewidth=120, precision=4, suppress=1)
 for key in topics_KV_by_name:
-    print key
-    print topics_KV_by_name[key]
+    print (key)
+    print (topics_KV_by_name[key])
 
 
 w_CK_by_name = {
@@ -101,8 +102,8 @@ if __name__ == '__main__':
     best_pos = np.flatnonzero(1.0/Cs_grid == 0.001)[0]
     prior_Cs_grid = 0.01 * np.exp(-1.0 * (best_pos - np.arange(11))**2 / 50.0)
 
-    print ""
-    print "==== FINE TUNING WEIGHT VECTORS"
+    print ("")
+    print ("==== FINE TUNING WEIGHT VECTORS")
     pi_estimation_weight_y = 0.0
     pi_estimation_mode = 'missing_y'
     nef_alpha = 1.1
@@ -122,14 +123,14 @@ if __name__ == '__main__':
             weight_y=1.0,
             pi_estimation_mode=pi_estimation_mode,
             pi_estimation_weight_y=pi_estimation_weight_y,
-            nef_alpha=nef_alpha,
+            alpha=nef_alpha,
             tau=tau,
             lambda_w=lambda_w,
             return_dict=True)
 
-        print ""
-        print "======", key
-        print loss_dict['summary_msg']
+        print ("")
+        print ("======", key)
+        print (loss_dict['summary_msg'])
 
         # Fit logistic regression model via cross-validation
         feat_DK = loss_dict['pi_DK']
@@ -142,27 +143,27 @@ if __name__ == '__main__':
         cv_clf.fit(feat_DK, y_D)
 
         acc_per_Cval = (
-            np.median(cv_clf.scores_.values()[0], axis=0) 
+            np.median(list(cv_clf.scores_.values())[0], axis=0) 
             + prior_Cs_grid)
         best_p = np.argmax(acc_per_Cval)
         best_C = Cs_grid[best_p]
-        print "## best lambda_w"
-        print 0.5 / best_C
+        print ("## best lambda_w")
+        print (0.5 / best_C)
 
         clf_with_best_C = sklearn.linear_model.LogisticRegression(
             fit_intercept=False, C=best_C)
         clf_with_best_C.fit(feat_DK, y_D)
 
-        print "## best w_CK:"
-        print clf_with_best_C.coef_
+        print ("## best w_CK:")
+        print (clf_with_best_C.coef_)
         w_CK_by_name[key] = clf_with_best_C.coef_
 
 
-    print ""
-    print "==== REPORTING RESULTS WITH FIXED TOPICS AND FINE-TUNED WEIGHTS"
+    print ("")
+    print ("==== REPORTING RESULTS WITH FIXED TOPICS AND FINE-TUNED WEIGHTS")
     for pi_estimation_mode in ['missing_y']: #, 'observe_y']:
-        print ""
-        print '---- pi_estimation_mode =', pi_estimation_mode
+        print ("")
+        print ('---- pi_estimation_mode =', pi_estimation_mode)
         for key in keys:
             topics_KV = topics_KV_by_name[key]
             w_CK = w_CK_by_name[key]
@@ -174,18 +175,18 @@ if __name__ == '__main__':
                 weight_y=1.0,
                 pi_estimation_mode=pi_estimation_mode,
                 pi_estimation_weight_y=pi_estimation_weight_y,
-                nef_alpha=nef_alpha,
+                alpha=nef_alpha,
                 tau=tau,
                 lambda_w=lambda_w,
                 return_dict=True)
-            print "%-25s uloss_x__pertok %.4f\n%-25s uloss_y__perdoc %.4f\n" % (
+            print ("%-25s uloss_x__pertok %.4f\n%-25s uloss_y__perdoc %.4f\n" % (
                 key, loss_dict['uloss_x__pertok'],
-                '', loss_dict['uloss_y__perdoc'])
+                '', loss_dict['uloss_y__perdoc']))
 
 
 
-    print ""
-    print "==== SAVING PARAMS PACKAGED UP AS _param_dict.dump"
+    print ("")
+    print ("==== SAVING PARAMS PACKAGED UP AS _param_dict.dump")
     for key in keys:
         fpath = os.path.join(dataset_path, '%s_param_dict.dump' % (key))
         GP = dict(
