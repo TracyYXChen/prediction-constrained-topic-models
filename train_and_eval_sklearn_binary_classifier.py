@@ -41,7 +41,7 @@ from distutils.dir_util import mkpath
 #from sklearn.externals import joblib
 import joblib
 from sklearn.base import BaseEstimator, ClassifierMixin, TransformerMixin, MetaEstimatorMixin
-from sklearn.metrics import roc_curve, auc, f1_score, roc_auc_score, accuracy_score
+from sklearn.metrics import roc_curve, auc, f1_score, roc_auc_score, accuracy_score, average_precision_score
 from sklearn.metrics import confusion_matrix as sk_confusion_matrix
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
@@ -288,7 +288,9 @@ def read_args_from_stdin_and_run():
                 x_cur = None
                 try:
                     if os.path.exists(sparse_fpath):
+                        print("Here is sparse_fpath", sparse_fpath)
                         x_cur = load_csr_matrix(sparse_fpath)
+                        print(x_cur)
                         assert np.all(np.isfinite(x_cur.data))
                         break
                     else:
@@ -309,6 +311,8 @@ def read_args_from_stdin_and_run():
             if x_cur is not None:
                 if feat_colnames_by_arr[feat_arr_name] is not None:
                     feat_dim = len(feat_colnames_by_arr[feat_arr_name])
+                    print('feat name, %s, feat_dim %d'%(feat_arr_name, feat_dim))
+                    print('x_cur shape', x_cur.shape[1])
                     assert x_cur.shape[1] == feat_dim
                 else:
                     # Add dummy colnames
@@ -491,8 +495,8 @@ def make_constructor_and_evaluator_funcs(
             yscore = yscore[:, 1]
         assert y.ndim == 1
         assert yscore.ndim == 1
-        return roc_auc_score(y, yscore)
-
+        #return roc_auc_score(y, yscore)
+        return average_precision_score(y, yscore)
     def calc_f1_conf_intervals(
             clf, x, y, ci_tuples=[(2.5,97.5), (10,90)], pos_label=1):
         yhat = clf.predict(x)
