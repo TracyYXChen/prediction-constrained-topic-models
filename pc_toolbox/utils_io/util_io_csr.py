@@ -4,6 +4,10 @@ import os
 
 def load_csr_matrix(filename):
     Q = np.load(filename)
+    print(np.shape(Q['data']))
+    print(np.shape(Q['indices']))
+    print(np.shape(Q['indptr']))
+    print(np.shape(Q['shape']))
     return scipy.sparse.csr_matrix(
         (Q['data'], Q['indices'], Q['indptr']),
         shape=Q['shape'])

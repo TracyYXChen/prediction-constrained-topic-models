@@ -32,6 +32,7 @@ def train_slda_model(
         weight_y=0.0,
         n_batches=1,
         pi_max_iters_first_train_lap=1.0,
+        
         **user_kwargs_P):
 
     # Load dataset

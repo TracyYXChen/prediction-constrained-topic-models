@@ -10,7 +10,8 @@ import pandas as pd
 import psutil
 import time
 
-from sklearn.metrics import roc_auc_score
+#from sklearn.metrics import roc_auc_score
+from sklearn.metrics import average_precision_score
 from distutils.dir_util import mkpath
 from collections import OrderedDict
 
@@ -183,17 +184,18 @@ def calc_perf_metrics_for_snapshot_param_dict(
 
                 # Area under ROC curve
                 try:
-                    roc_auc_y__c = roc_auc_score(ytrue_c_D, yproba_c_D)
+                    #roc_auc_y__c = roc_auc_score(ytrue_c_D, yproba_c_D)
+                    roc_auc_y__c = average_precision_score(ytrue_c_D, yproba_c_D)
                 except ValueError as e:
                     # Error occurs when not enough examples of each label
                     roc_auc_y__c = 0.0
-                info_dict['y_%d_roc_auc' % c] = roc_auc_y__c
+                info_dict['y_%d_auprc' % c] = roc_auc_y__c
 
         # Case 2/2: real values
         elif output_data_type.count('real'):
             # Remember, y_proba_DC is really estimated mean of y_DC
             y_est_DC = ans_dict.pop('y_proba_DC')
-            for c in xrange(n_labels):
+            for c in range(n_labels):
                 y_true_c_D = datasets_by_split[split_name]['y_DC'][:, c]
                 y_est_c_D = y_est_DC[:, c]
                 # Keep only finite values
