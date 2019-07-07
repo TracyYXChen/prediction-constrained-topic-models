@@ -1,3 +1,6 @@
+# customized
+datasets/toy_bars_3x3/
+
 # C code compiled from cython
 *cython.c
 
